@@ -10,6 +10,8 @@ Follow the submission instructions from Lab 01.
 ## Resources  
 [Ternary Operator MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
 
+[Web Storage API MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API)
+
 ## Configuration
 _Your repository must include:_
 
