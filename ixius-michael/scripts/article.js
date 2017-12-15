@@ -47,9 +47,21 @@ Article.loadAll();
 
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
 Article.fetchAll = () => {
-  // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
-  if (localStorage.rawData) {
+  
+  $.getJSON('data/hackerIpsum.json').then(function(rawData){
+          console.log('things', rawData);
+          Article.loadAll(rawData);
+          Article.all.forEach(article => {
+            $('#articles').append(article.toHtml())
+          });
+          articleView.populateFilters();
+          articleView.handleCategoryFilter();
+          articleView.handleAuthorFilter();
+          articleView.handleMainNav();
+          articleView.setTeasers();
 
+        });
+=======
     Article.loadAll();
   } else { 
     
@@ -58,4 +70,21 @@ Article.fetchAll = () => {
     });
   }
 }
+
+// Article.fetchAll = () => {
+//   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
+//   if (localStorage.rawData) {
+// JSON.parce
+
+//     Article.loadAll(rawData);
+// console.log('stuff and things 2');
+//   } else { 
+//     console.log('stuff and things 3');
+    
+//     $.getJSON('data/hackerIpsum.json').then(function(data){
+//       console.log('things', data);
+//     });
+
+//   }
+// }
 
