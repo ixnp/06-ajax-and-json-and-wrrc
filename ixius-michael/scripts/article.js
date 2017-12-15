@@ -37,54 +37,36 @@ Article.prototype.toHtml = function() {
 // rawData is called in the Article.fetchAll function. rawData represents an argument in this instance. in the past it held the article content. This time around it's passed as a argument and used as a keyword inside the Article.loadAll function.
 Article.loadAll = rawData => {
   rawData.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
-
+ 
   rawData.forEach(articleObject => Article.all.push(new Article(articleObject)))
-
-  rawData = ['Monkey','Monkey2','Monkey3']
-}
-Article.loadAll();
-
-
-// REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
-Article.fetchAll = () => {
-  
-  $.getJSON('data/hackerIpsum.json').then(function(rawData){
-          console.log('things', rawData);
-          Article.loadAll(rawData);
+ }
+ // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
+ Article.fetchAll = () => {
+ 
+  if(localStorage.rawData){
+    var localData = JSON.parse(rawData);
+    console.log('local Data!',localData);
+    Article.loadAll(localData);
+    Article.all.forEach(localData => {
+      $('#articles').append(localData.toHtml())
+    });
+    articleView.initIndexPage()
+    
+    console.log('local storage working!');
+  }else{
+ 
+  $.getJSON('data/hackerIpsum.json').then(function(data){
+          console.log('things', data);
+          Article.loadAll(data);
           Article.all.forEach(article => {
             $('#articles').append(article.toHtml())
           });
-          articleView.populateFilters();
-          articleView.handleCategoryFilter();
-          articleView.handleAuthorFilter();
-          articleView.handleMainNav();
-          articleView.setTeasers();
-
+          // articleView.initIndexPage()
+          Article.fetchAll;
+          
+ 
+          var rawData = JSON.stringify(data);
+          localStorage.setItem(rawData,data);
         });
-=======
-    Article.loadAll();
-  } else { 
-    
-    $.getJSON('./data/hackerIpsum.json').then(function(data){
-      console.log('things', data);
-    });
-  }
-}
-
-// Article.fetchAll = () => {
-//   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
-//   if (localStorage.rawData) {
-// JSON.parce
-
-//     Article.loadAll(rawData);
-// console.log('stuff and things 2');
-//   } else { 
-//     console.log('stuff and things 3');
-    
-//     $.getJSON('data/hackerIpsum.json').then(function(data){
-//       console.log('things', data);
-//     });
-
-//   }
-// }
-
+ }
+ };
