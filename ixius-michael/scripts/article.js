@@ -44,11 +44,9 @@ Article.loadAll = rawData => {
  Article.fetchAll = () => {
  
   if(localStorage.rawData){
-    console.log('local Data! a',localData);
-
 
     var localData = JSON.parse(localStorage.rawData);
-
+    Article.loadAll(localData);
     articleView.initIndexPage();
 
   }else{
