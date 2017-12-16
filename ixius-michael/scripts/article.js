@@ -61,8 +61,8 @@ Article.loadAll = rawData => {
 console.log('CELLO', data);
  
 localStorage.setItem('rawData',JSON.stringify(data));
-          // Article.fetchAll;
-          Article.loadAll(data);
+          Article.fetchAll();
+          // Article.loadAll(data);
           // Article.all.forEach(article => {
           //   $('#articles').append(article.toHtml())
           // });
