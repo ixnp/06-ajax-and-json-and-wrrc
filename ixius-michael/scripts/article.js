@@ -44,29 +44,32 @@ Article.loadAll = rawData => {
  Article.fetchAll = () => {
  
   if(localStorage.rawData){
-    var localData = JSON.parse(rawData);
-    console.log('local Data!',localData);
-    Article.loadAll(localData);
-    Article.all.forEach(localData => {
-      $('#articles').append(localData.toHtml())
-    });
-    articleView.initIndexPage()
+    console.log('local Data! a',localData);
+
+
+    var localData = JSON.parse(localStorage.rawData);
+      Article.loadAll(localData);
+        // Article.all.forEach(localData => {
+        //   $('#articles').append(localData.toHtml())
+        // });
+    articleView.initIndexPage();
     
     console.log('local storage working!');
   }else{
  
   $.getJSON('data/hackerIpsum.json').then(function(data){
-          console.log('things', data);
-          Article.loadAll(data);
-          Article.all.forEach(article => {
-            $('#articles').append(article.toHtml())
-          });
-          // articleView.initIndexPage()
-          Article.fetchAll;
-          
+console.log('CELLO', data);
  
-          var rawData = JSON.stringify(data);
-          localStorage.setItem(rawData,data);
+localStorage.setItem('rawData',JSON.stringify(data));
+          // Article.fetchAll;
+          Article.loadAll(data);
+          // Article.all.forEach(article => {
+          //   $('#articles').append(article.toHtml())
+          // });
+          // articleView.initIndexPage();
+
+          
+
         });
  }
  };
