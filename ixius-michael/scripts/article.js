@@ -48,27 +48,14 @@ Article.loadAll = rawData => {
 
 
     var localData = JSON.parse(localStorage.rawData);
-      Article.loadAll(localData);
-        // Article.all.forEach(localData => {
-        //   $('#articles').append(localData.toHtml())
-        // });
+
     articleView.initIndexPage();
-    
-    console.log('local storage working!');
+
   }else{
- 
   $.getJSON('data/hackerIpsum.json').then(function(data){
-console.log('CELLO', data);
  
 localStorage.setItem('rawData',JSON.stringify(data));
           Article.fetchAll();
-          // Article.loadAll(data);
-          // Article.all.forEach(article => {
-          //   $('#articles').append(article.toHtml())
-          // });
-          // articleView.initIndexPage();
-
-          
 
         });
  }
